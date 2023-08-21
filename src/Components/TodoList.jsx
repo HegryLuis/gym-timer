@@ -1,23 +1,22 @@
 import React, { useState } from "react";
 import TodoButton from "./UI/TodoButton/TodoButton";
-import TodoInput from "./UI/TodoInput/TodoInput";
 import TodoItem from "./TodoItem";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import TodoFillers from "./TodoFillers";
 
-const TodoList = ({ todos, setTodos, restTime, setRestTime, setFlag }) => {
+const TodoList = ({ todos, onSetTodos, restTime, onSetRest, onSetFlag }) => {
     const [newTodo, setNewTodo] = useState({ exercise: "", duration: "" });
 
-    const addTodo = () => {
+    const handleAddTodo = () => {
         if (newTodo.exercise.trim() !== "" && newTodo.duration !== "") {
-            setTodos([...todos, newTodo]);
+            onSetTodos([...todos, newTodo]);
             setNewTodo({ exercise: "", duration: "" });
         }
     };
 
-    const removeTodo = (index) => {
+    const handleRemoveTodo = (index) => {
         const updatedTodos = todos.filter((_, i) => i !== index);
-        setTodos(updatedTodos);
+        onSetTodos(updatedTodos);
     };
 
     return (
@@ -26,9 +25,9 @@ const TodoList = ({ todos, setTodos, restTime, setRestTime, setFlag }) => {
 
             <TodoFillers
                 newTodo={newTodo}
-                setNewTodo={setNewTodo}
+                onSetTodo={setNewTodo}
                 restTime={restTime}
-                setRestTime={setRestTime}
+                onSetRest={onSetRest}
             />
 
             <TodoButton
@@ -36,7 +35,7 @@ const TodoList = ({ todos, setTodos, restTime, setRestTime, setFlag }) => {
                     newTodo.exercise.trim() === "" || newTodo.duration === ""
                 }
                 style={{ margin: "10px 0" }}
-                onClick={addTodo}
+                onClick={handleAddTodo}
             >
                 Add
             </TodoButton>
@@ -54,7 +53,7 @@ const TodoList = ({ todos, setTodos, restTime, setRestTime, setFlag }) => {
                                 <TodoItem
                                     exercise={todo.exercise}
                                     duration={todo.duration}
-                                    removeTodo={removeTodo}
+                                    onRemove={handleRemoveTodo}
                                     index={index}
                                 />
                             </li>
@@ -64,7 +63,7 @@ const TodoList = ({ todos, setTodos, restTime, setRestTime, setFlag }) => {
             </ul>
 
             <TodoButton
-                onClick={() => setFlag(false)}
+                onClick={() => onSetFlag(false)}
                 style={{ width: "160px", height: "30px" }}
                 disabled={todos.length === 0 || restTime === ""}
             >

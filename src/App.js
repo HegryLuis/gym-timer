@@ -18,10 +18,10 @@ function App() {
             {flag ? (
                 <TodoList
                     todos={todos}
-                    setTodos={setTodos}
+                    onSetTodos={setTodos}
                     restTime={restTime}
-                    setRestTime={setRestTime}
-                    setFlag={setFlag}
+                    onSetRest={setRestTime}
+                    onSetFlag={setFlag}
                 />
             ) : (
                 <GymTimer todos={todos} restTime={restTime} />
