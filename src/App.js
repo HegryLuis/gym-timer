@@ -9,6 +9,8 @@ function App() {
     //     { exercise: "Abs", duration: "4" },
     //     { exercise: "Something else", duration: "5" },
     // ];
+    // const [todos, setTodos] = useState(defaultExercises);
+    // const [restTime, setRestTime] = useState(2);
     const [todos, setTodos] = useState([]);
     const [restTime, setRestTime] = useState("");
     const [flag, setFlag] = useState(true);

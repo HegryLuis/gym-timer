@@ -6,30 +6,30 @@ const TodoFillers = ({ newTodo, onSetTodo, restTime, onSetRest }) => {
         <div className="todo-fillers">
             <TodoInput
                 type="text"
+                name="exercise"
                 value={newTodo.exercise}
                 onChange={(e) =>
                     onSetTodo({ ...newTodo, exercise: e.target.value })
                 }
-                // placeholder="Enter a new exercise..."
-                label="hello"
+                label="New Exercise"
             />
             <TodoInput
                 type="number"
+                name="duration"
                 min={1}
                 value={newTodo.duration}
                 onChange={(e) =>
                     onSetTodo({ ...newTodo, duration: e.target.value })
                 }
-                // placeholder="Enter a number of duration..."
-                label="hello"
+                label="Duration"
             />
             <TodoInput
                 type="number"
+                id="rest"
                 min={0}
                 value={restTime}
                 onChange={(e) => onSetRest(e.target.value)}
-                placeholder="Enter rest time between exercises..."
-                label="hello"
+                label="Rest time"
             />
         </div>
     );
