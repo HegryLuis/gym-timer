@@ -6,6 +6,10 @@
     letter-spacing: 1.1px;
 }
 
+li {
+    list-style: none;
+}
+
 .App {
     display: flex;
     justify-content: center;
@@ -49,7 +53,6 @@
 
     margin: 20px auto;
     border: 2px solid #fff;
-    list-style: none;
 }
 
 .list-enter {
@@ -65,4 +68,42 @@
 .list-exit-active {
     transform: translateX(-150px);
     transition: all 500ms ease-in;
+}
+
+.circle-background {
+    fill: none;
+    stroke: #ddd;
+}
+
+.circle-progress {
+    fill: none;
+    stroke: #376c01e3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke-dashoffset 1s ease-in-out;
+}
+
+.circle-text {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.exercise-list {
+    display: flex;
+    flex-direction: column;
+    min-width: 550px;
+    max-height: 500px;
+}
+
+.exercise-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    border: 2px solid #333;
+}
+
+.exercise-text {
+    margin: 0 auto;
+    font-size: 20px;
 }

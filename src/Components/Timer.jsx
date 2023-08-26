@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
+import SVGTimer from "../SVGTimer";
 
 const Timer = ({ duration, plusIndex, exercise, restTime }) => {
     const [seconds, setSeconds] = useState();
+    const [initialDuration, setInitialDuration] = useState(duration);
     const [isRest, setIsRest] = useState(false);
     const intervalId = useRef(null);
 
@@ -10,7 +12,13 @@ const Timer = ({ duration, plusIndex, exercise, restTime }) => {
             return;
         }
 
-        isRest ? setSeconds(restTime) : setSeconds(duration);
+        if (isRest) {
+            setSeconds(restTime);
+            setInitialDuration(restTime);
+        } else {
+            setSeconds(duration);
+            setInitialDuration(duration);
+        }
 
         intervalId.current = setInterval(() => {
             setSeconds((prev) => prev - 1);
@@ -18,7 +26,7 @@ const Timer = ({ duration, plusIndex, exercise, restTime }) => {
     }, [duration, isRest]);
 
     useEffect(() => {
-        if (seconds === 0) {
+        if (seconds < 0) {
             clearInterval(intervalId.current);
 
             if (isRest) {
@@ -36,7 +44,10 @@ const Timer = ({ duration, plusIndex, exercise, restTime }) => {
                 <div>Congratulation!</div>
             ) : (
                 <div>
-                    {seconds} + {isRest ? "Rest" : exercise}
+                    <SVGTimer
+                        duration={seconds}
+                        initialDuration={initialDuration}
+                    />
                 </div>
             )}
         </div>
