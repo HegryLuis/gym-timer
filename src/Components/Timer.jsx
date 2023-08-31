@@ -1,46 +1,33 @@
 import React, { useState, useEffect, useRef } from "react";
-import SVGTimer from "../SVGTimer";
+import SVGTimer from "./SVGTimer";
 
-const Timer = ({ duration, plusIndex, exercise, restTime }) => {
+// do no pass all the todos as a prop
+const Timer = ({ todo, plusIndex }) => {
     const [seconds, setSeconds] = useState();
-    const [initialDuration, setInitialDuration] = useState(duration);
-    const [isRest, setIsRest] = useState(false);
+    const [initialDuration, setInitialDuration] = useState();
     const intervalId = useRef(null);
 
     useEffect(() => {
-        if (duration === 0 && exercise === "Finish") {
-            return;
-        }
+        if (todo && todo.id !== -2 && todo.duration) {
+            setSeconds(todo.duration);
+            setInitialDuration(todo.duration);
 
-        if (isRest) {
-            setSeconds(restTime);
-            setInitialDuration(restTime);
-        } else {
-            setSeconds(duration);
-            setInitialDuration(duration);
+            intervalId.current = setInterval(() => {
+                setSeconds((prev) => prev - 1);
+            }, 1000);
         }
-
-        intervalId.current = setInterval(() => {
-            setSeconds((prev) => prev - 1);
-        }, 1000);
-    }, [duration, isRest]);
+    }, [todo]);
 
     useEffect(() => {
-        if (seconds < 0) {
+        if (seconds !== undefined && seconds < 0) {
             clearInterval(intervalId.current);
-
-            if (isRest) {
-                setIsRest(false);
-                plusIndex();
-            } else {
-                setIsRest(true);
-            }
+            plusIndex();
         }
     }, [seconds]);
 
     return (
         <div>
-            {duration === 0 && exercise === "Finish" ? (
+            {todo.id === -2 ? (
                 <div>Congratulation!</div>
             ) : (
                 <div>

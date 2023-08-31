@@ -19,9 +19,19 @@ const TodoList = ({ todos, onSetTodos, restTime, onSetRest, onSetFlag }) => {
         onSetTodos(updatedTodos);
     };
 
+    const addRestBetweenTodos = () => {
+        const newTodos = todos.flatMap((todo, index) => {
+            return index === todos.length - 1
+                ? todo
+                : [todo, { exercise: "Rest", duration: restTime }];
+        });
+
+        onSetTodos(newTodos);
+    };
+
     return (
         <div className="todo-block">
-            <h1 className="todo-title">TODO List</h1>
+            <h1 className="todo-title">GYM TIMER</h1>
 
             <TodoFillers
                 newTodo={newTodo}
@@ -41,7 +51,7 @@ const TodoList = ({ todos, onSetTodos, restTime, onSetRest, onSetFlag }) => {
             </TodoButton>
 
             <ul>
-                <TransitionGroup>
+                <TransitionGroup className="todo-ul">
                     {todos.map((todo, index) => (
                         <CSSTransition
                             timeout={500}
@@ -63,7 +73,10 @@ const TodoList = ({ todos, onSetTodos, restTime, onSetRest, onSetFlag }) => {
             </ul>
 
             <TodoButton
-                onClick={() => onSetFlag(false)}
+                onClick={() => {
+                    addRestBetweenTodos();
+                    onSetFlag(false);
+                }}
                 style={{ width: "160px", height: "30px" }}
                 disabled={todos.length === 0 || restTime === ""}
             >

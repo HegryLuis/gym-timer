@@ -4,6 +4,11 @@
     box-sizing: border-box;
     font-family: "Roboto Condensed", sans-serif;
     letter-spacing: 1.1px;
+    user-select: none;
+}
+
+button {
+    cursor: pointer;
 }
 
 li {
@@ -14,7 +19,7 @@ li {
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     background: radial-gradient(
         circle at 100%,
         #333,
@@ -42,6 +47,11 @@ li {
     display: flex;
     justify-content: space-between;
     margin: 50px 0;
+}
+
+.todo-ul {
+    max-height: 700px;
+    overflow: auto;
 }
 
 .todo-list {
@@ -93,6 +103,7 @@ li {
     flex-direction: column;
     min-width: 550px;
     max-height: 500px;
+    overflow: auto;
 }
 
 .exercise-item {
@@ -106,4 +117,10 @@ li {
 .exercise-text {
     margin: 0 auto;
     font-size: 20px;
+}
+
+.gym-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

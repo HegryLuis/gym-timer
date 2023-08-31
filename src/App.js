@@ -1,27 +1,25 @@
 import React, { useState } from "react";
 import "./App.css";
 import TodoList from "./Components/TodoList";
-import GymTimer from "./Components/GymTimer";
-import SVGTimer from "./SVGTimer";
 import ExerciseList from "./Components/ExerciseList";
+import GymApp from "./Components/GymApp";
 
 function App() {
     const defaultExercises = [
-        { exercise: "Push ups", duration: "20" },
-        { exercise: "Abs", duration: "4" },
-        { exercise: "Something else", duration: "5" },
+        { id: 0, exercise: "Push ups", duration: "2" },
+        { id: 1, exercise: "Rest", duration: "3" },
+        { id: 2, exercise: "Something else", duration: "3" },
     ];
-    const [todos, setTodos] = useState(defaultExercises);
-    const [restTime, setRestTime] = useState(2);
-    // const [todos, setTodos] = useState([]);
-    // const [restTime, setRestTime] = useState("");
+    // const [todos, setTodos] = useState(defaultExercises);
+    const [todoId, setTodoId] = useState(0);
+    // const [restTime, setRestTime] = useState();
+    const [todos, setTodos] = useState([]);
+    const [restTime, setRestTime] = useState("");
     const [flag, setFlag] = useState(true);
 
     return (
         <div className="App">
-            <GymTimer todos={todos} restTime={restTime} />
-            <ExerciseList todos={todos} />
-            {/* {flag ? (
+            {flag ? (
                 <TodoList
                     todos={todos}
                     onSetTodos={setTodos}
@@ -30,8 +28,8 @@ function App() {
                     onSetFlag={setFlag}
                 />
             ) : (
-                <GymTimer todos={todos} restTime={restTime} />
-            )} */}
+                <GymApp todos={todos} />
+            )}
         </div>
     );
 }

@@ -9,10 +9,10 @@ const SVGTimer = ({ duration, initialDuration }) => {
 
     const formatTime = (time) => {
         const minutes = Math.floor(time / 60);
-        const duration = time % 60;
+        const seconds = time % 60;
         return `${minutes < 10 ? "0" : ""}${minutes}:${
-            duration < 10 ? "0" : ""
-        }${duration}`;
+            seconds < 10 ? "0" : ""
+        }${seconds}`;
     };
 
     return (
