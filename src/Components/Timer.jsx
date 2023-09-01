@@ -1,27 +1,28 @@
 import React, { useState, useEffect, useRef } from "react";
 import SVGTimer from "./SVGTimer";
 
-// do no pass all the todos as a prop
-const Timer = ({ todo, plusIndex }) => {
+const Timer = ({ todo, onSetCurrId, onNext }) => {
     const [seconds, setSeconds] = useState();
     const [initialDuration, setInitialDuration] = useState();
     const intervalId = useRef(null);
+    const nextTodo = onNext();
 
     useEffect(() => {
         if (todo && todo.id !== -2 && todo.duration) {
             setSeconds(todo.duration);
             setInitialDuration(todo.duration);
+            onSetCurrId(todo.id);
 
             intervalId.current = setInterval(() => {
                 setSeconds((prev) => prev - 1);
             }, 1000);
         }
-    }, [todo]);
+    }, [todo?.id]);
 
     useEffect(() => {
         if (seconds !== undefined && seconds < 0) {
             clearInterval(intervalId.current);
-            plusIndex();
+            onSetCurrId(nextTodo.id);
         }
     }, [seconds]);
 

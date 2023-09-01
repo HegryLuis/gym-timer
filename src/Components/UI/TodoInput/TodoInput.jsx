@@ -6,7 +6,7 @@ const TodoInput = ({ label, ...props }) => {
         <div className={classes.todoWrap}>
             <input
                 required
-                autocomplete="off"
+                autoComplete="off"
                 className={classes.todoInput}
                 {...props}
             />

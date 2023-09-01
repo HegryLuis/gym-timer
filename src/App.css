@@ -106,12 +106,19 @@ li {
     overflow: auto;
 }
 
-.exercise-item {
+.exercise-item,
+.exercise-item__active {
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 20px 0;
     border: 2px solid #333;
+    transition: all 500ms;
+}
+.exercise-item__active {
+    color: greenyellow;
+    height: 100px;
 }
 
 .exercise-text {

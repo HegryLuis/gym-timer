@@ -5,7 +5,13 @@ const SVGTimer = ({ duration, initialDuration }) => {
     const circleWidth = 200;
     const dashArray = 2 * Math.PI * radius;
 
-    const dashOffset = dashArray * (1 - duration / initialDuration);
+    const initialDurationValue = parseInt(initialDuration);
+    const durationValue = parseInt(duration);
+
+    const dashOffset =
+        initialDurationValue > 0
+            ? dashArray * (1 - durationValue / initialDurationValue)
+            : 0;
 
     const formatTime = (time) => {
         const minutes = Math.floor(time / 60);

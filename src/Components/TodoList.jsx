@@ -5,11 +5,17 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import TodoFillers from "./TodoFillers";
 
 const TodoList = ({ todos, onSetTodos, restTime, onSetRest, onSetFlag }) => {
-    const [newTodo, setNewTodo] = useState({ exercise: "", duration: "" });
+    const [newTodo, setNewTodo] = useState({
+        id: "",
+        exercise: "",
+        duration: "",
+    });
 
     const handleAddTodo = () => {
         if (newTodo.exercise.trim() !== "" && newTodo.duration !== "") {
-            onSetTodos([...todos, newTodo]);
+            const newId = todos.length;
+            const newTodoWithId = { ...newTodo, id: newId };
+            onSetTodos([...todos, newTodoWithId]);
             setNewTodo({ exercise: "", duration: "" });
         }
     };
@@ -20,10 +26,14 @@ const TodoList = ({ todos, onSetTodos, restTime, onSetRest, onSetFlag }) => {
     };
 
     const addRestBetweenTodos = () => {
+        let restId = todos.length;
         const newTodos = todos.flatMap((todo, index) => {
             return index === todos.length - 1
                 ? todo
-                : [todo, { exercise: "Rest", duration: restTime }];
+                : [
+                      todo,
+                      { id: restId++, exercise: "Rest", duration: restTime },
+                  ];
         });
 
         onSetTodos(newTodos);
@@ -61,8 +71,7 @@ const TodoList = ({ todos, onSetTodos, restTime, onSetRest, onSetFlag }) => {
                         >
                             <li>
                                 <TodoItem
-                                    exercise={todo.exercise}
-                                    duration={todo.duration}
+                                    todo={todo}
                                     onRemove={handleRemoveTodo}
                                     index={index}
                                 />
